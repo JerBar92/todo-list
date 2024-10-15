@@ -14,11 +14,35 @@ nav {
   background-color: rgb(214, 214, 214);
 }
 
-#display {
+#title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+#displayProject {
   min-width: 100vh;
   min-height: 100vh;
 }
 
 #newTask {
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  /*display: flex;*/
+}
+
+#projectList > div {
   display: flex;
+  gap: 3rem;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+#newProjectBtn {
+  margin-bottom: 1rem;
 }
