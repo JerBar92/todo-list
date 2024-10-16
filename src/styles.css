@@ -17,6 +17,7 @@ nav {
 #title {
   text-align: center;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 h2 {
@@ -28,14 +29,14 @@ h2 {
   min-height: 100vh;
 }
 
-#newTask {
+#taskFormgit {
   position: absolute;
   top: 15%;
   left: 25%;
   /*display: flex;*/
 }
 
-#projectList > div {
+.projectDiv {
   display: flex;
   gap: 3rem;
   margin-bottom: 0.5rem;
@@ -43,6 +44,23 @@ h2 {
   padding: 0 0.5rem 0 0.5rem;
 }
 
+.projectAddBtn {
+  border: none;
+  background: none;
+}
+
 #newProjectBtn {
   margin-bottom: 1rem;
+}
+
+#projectHead {
+  margin-top: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#newTaskBtn {
+  padding: 0.3rem 0.3rem;
 }

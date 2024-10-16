@@ -13,13 +13,16 @@ export const project = (function () {
   const createProject = () => {
     const projectList = document.querySelector("#projectList");
     const projectDiv = document.createElement("div");
-    const projectAdd = document.createElement("li");
+    const projectAdd = document.createElement("button");
     const projectRemove = document.createElement("button");
     projectArray.forEach((project, index) => {
       projectAdd.textContent = project.title;
+      projectAdd.className = "projectAddBtn";
+      projectAdd.id = `projectAdd-${index}`;
       projectRemove.textContent = "Remove";
-      projectRemove.id = `projectRemove${index}`;
-      projectDiv.id = `projectDiv${index}`;
+      projectRemove.className = "projectRemoveBtn";
+      projectRemove.id = `projectRemove-${index}`;
+      projectDiv.className = "projectDiv";
       projectDiv.appendChild(projectAdd);
       projectDiv.appendChild(projectRemove);
       projectList?.appendChild(projectDiv);
@@ -28,7 +31,6 @@ export const project = (function () {
         projectArray.splice(index, 1);
       });*/
     });
-    console.log(projectArray);
   };
 
   const displayProjectList = (title, toDo) => {
@@ -39,6 +41,7 @@ export const project = (function () {
 
   const displayProject = (title) => {
     const displayProject = document.querySelector("#displayProject");
+    const taskForm = document.querySelector("#taskForm");
     const projectHead = document.createElement("div");
     const projectName = document.createElement("h2");
     const newTask = document.createElement("button");
@@ -46,10 +49,19 @@ export const project = (function () {
     projectName.id = "projectName";
     projectName.textContent = title;
     projectHead.appendChild(projectName);
-    newTask.id = "newTaskBtn";
+    newTask.textContent = "New task";
+    newTask.className = "newTaskBtn";
+    newTask.addEventListener("click", () => taskForm.show());
     projectHead.appendChild(newTask);
     displayProject?.appendChild(projectHead);
   };
 
-  return { listProjects, displayProjectList, displayProject };
+  const clearNewProject = () => {
+    const projectTitle = document.querySelector("#projectTitle");
+    const newProject = document.querySelector("#newProject");
+    projectTitle.value = "";
+    newProject.close();
+  };
+
+  return { listProjects, displayProjectList, displayProject, clearNewProject };
 })();
