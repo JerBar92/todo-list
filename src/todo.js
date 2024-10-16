@@ -9,5 +9,6 @@ export const toDo = (function () {
       priority: priority,
     };
   }
+
   return { createToDo };
 })();

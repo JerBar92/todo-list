@@ -24,12 +24,12 @@ h2 {
   margin-bottom: 1rem;
 }
 
-#displayProject {
+#projectDisplay {
   min-width: 100vh;
   min-height: 100vh;
 }
 
-#taskFormgit {
+#taskForm {
   position: absolute;
   top: 15%;
   left: 25%;

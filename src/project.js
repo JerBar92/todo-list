@@ -1,5 +1,7 @@
 export const project = (function () {
   const projectArray = [];
+  const projectDisplay = document.querySelector("#projectDisplay");
+  const projectList = document.querySelector("#projectList");
 
   function projects(title, toDo) {
     return {
@@ -11,26 +13,36 @@ export const project = (function () {
   const listProjects = () => projectArray;
 
   const createProject = () => {
-    const projectList = document.querySelector("#projectList");
     const projectDiv = document.createElement("div");
     const projectAdd = document.createElement("button");
     const projectRemove = document.createElement("button");
     projectArray.forEach((project, index) => {
+      projectDiv.className = "projectDiv";
+      projectDiv.id = `projectDiv${index}`;
       projectAdd.textContent = project.title;
       projectAdd.className = "projectAddBtn";
       projectAdd.id = `projectAdd-${index}`;
+      projectAdd.addEventListener("click", () => {
+        clearProjectDisplay();
+        displayProject(project.title);
+      });
       projectRemove.textContent = "Remove";
       projectRemove.className = "projectRemoveBtn";
       projectRemove.id = `projectRemove-${index}`;
-      projectDiv.className = "projectDiv";
+      projectRemove.addEventListener("click", removeProject);
+
       projectDiv.appendChild(projectAdd);
       projectDiv.appendChild(projectRemove);
       projectList?.appendChild(projectDiv);
-
-      /*projectRemove.addEventListener("click", () => {
-        projectArray.splice(index, 1);
-      });*/
     });
+  };
+
+  const removeProject = (event) => {
+    let index = parseInt(event.target.id.split("-")[1]);
+    const projectDiv = document.getElementById(`projectDiv${index}`);
+    projectList.removeChild(projectDiv);
+    projectArray.splice(index, 1);
+    clearProjectDisplay();
   };
 
   const displayProjectList = (title, toDo) => {
@@ -40,7 +52,6 @@ export const project = (function () {
   };
 
   const displayProject = (title) => {
-    const displayProject = document.querySelector("#displayProject");
     const taskForm = document.querySelector("#taskForm");
     const projectHead = document.createElement("div");
     const projectName = document.createElement("h2");
@@ -53,7 +64,7 @@ export const project = (function () {
     newTask.className = "newTaskBtn";
     newTask.addEventListener("click", () => taskForm.show());
     projectHead.appendChild(newTask);
-    displayProject?.appendChild(projectHead);
+    projectDisplay?.appendChild(projectHead);
   };
 
   const clearNewProject = () => {
@@ -63,5 +74,13 @@ export const project = (function () {
     newProject.close();
   };
 
+  const clearProjectDisplay = () => {
+    const projectHead = document.querySelector("#projectHead");
+    if (!projectHead) {
+      return;
+    } else {
+      projectDisplay?.removeChild(projectHead);
+    }
+  };
   return { listProjects, displayProjectList, displayProject, clearNewProject };
 })();
