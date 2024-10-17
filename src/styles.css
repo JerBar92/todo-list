@@ -22,6 +22,7 @@ nav {
 
 h2 {
   margin-bottom: 1rem;
+  padding-left: 0.5rem;
 }
 
 #projectDisplay {
@@ -51,6 +52,7 @@ h2 {
 
 #newProjectBtn {
   margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 #projectHead {

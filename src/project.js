@@ -12,6 +12,7 @@ export const project = (function () {
 
   const listProjects = () => projectArray;
 
+  //Create a new project on the nav
   const createProject = () => {
     const projectDiv = document.createElement("div");
     const projectAdd = document.createElement("button");
@@ -24,7 +25,7 @@ export const project = (function () {
       projectAdd.id = `projectAdd-${index}`;
       projectAdd.addEventListener("click", () => {
         clearProjectDisplay();
-        displayProject(project.title);
+        displayProject(project.title, index);
       });
       projectRemove.textContent = "Remove";
       projectRemove.className = "projectRemoveBtn";
@@ -37,21 +38,25 @@ export const project = (function () {
     });
   };
 
+  //remove a project in the nav
   const removeProject = (event) => {
     let index = parseInt(event.target.id.split("-")[1]);
-    const projectDiv = document.getElementById(`projectDiv${index}`);
-    projectList.removeChild(projectDiv);
     projectArray.splice(index, 1);
+    const projectDiv = document.querySelectorAll(".projectDiv");
+    projectDiv.forEach((div) => projectList?.removeChild(div));
     clearProjectDisplay();
+    createProject();
   };
 
+  //Display the project in the nav and add it in the project array
   const displayProjectList = (title, toDo) => {
     const newProject = projects(title, toDo);
     projectArray.push(newProject);
     createProject();
   };
 
-  const displayProject = (title) => {
+  //Display the project with is name and a button to add task with a form
+  const displayProject = (title, index) => {
     const taskForm = document.querySelector("#taskForm");
     const projectHead = document.createElement("div");
     const projectName = document.createElement("h2");
@@ -62,11 +67,17 @@ export const project = (function () {
     projectHead.appendChild(projectName);
     newTask.textContent = "New task";
     newTask.className = "newTaskBtn";
-    newTask.addEventListener("click", () => taskForm.show());
+    newTask.id = `newTaskBtn${index}`;
+    newTask.addEventListener("click", () => {
+      const addTask = document.querySelector(".addTask");
+      addTask.id = `addtask-${index}`;
+      taskForm.show();
+    });
     projectHead.appendChild(newTask);
     projectDisplay?.appendChild(projectHead);
   };
 
+  //Clear and close the form use to create a new project
   const clearNewProject = () => {
     const projectTitle = document.querySelector("#projectTitle");
     const newProject = document.querySelector("#newProject");
@@ -74,6 +85,7 @@ export const project = (function () {
     newProject.close();
   };
 
+  //Clear and change the name of the project when a new project is selected
   const clearProjectDisplay = () => {
     const projectHead = document.querySelector("#projectHead");
     if (!projectHead) {

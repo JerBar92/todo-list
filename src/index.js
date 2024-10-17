@@ -12,7 +12,7 @@ cancelProject?.addEventListener("click", () => project.clearNewProject());
 const projectTitle = document.querySelector("#projectTitle");
 const addProject = document.querySelector("#addProject");
 
-project.displayProjectList("My Project", []);
+//project.displayProjectList("My Project", []);
 
 addProject?.addEventListener("click", (event) => {
   event.preventDefault();
@@ -21,4 +21,4 @@ addProject?.addEventListener("click", (event) => {
   project.clearNewProject();
 });
 
-project.displayProject(project.listProjects()[0].title);
+//project.displayProject(project.listProjects()[0].title);
