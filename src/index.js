@@ -21,4 +21,5 @@ addProject?.addEventListener("click", (event) => {
   project.clearNewProject();
 });
 
-//project.displayProject(project.listProjects()[0].title);
+const cancelTask = document.querySelector("#cancelTask");
+cancelTask?.addEventListener("click", () => toDo.clearNewTask());

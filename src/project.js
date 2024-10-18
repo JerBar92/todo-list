@@ -1,24 +1,27 @@
+import { toDo } from "./todo";
+
 export const project = (function () {
   const projectArray = [];
   const projectDisplay = document.querySelector("#projectDisplay");
   const projectList = document.querySelector("#projectList");
+  const head = document.querySelector("#head");
 
-  function projects(title, toDo) {
+  function projects(title, todo) {
     return {
       title: title,
-      toDo: toDo,
+      todo: todo,
     };
   }
 
   const listProjects = () => projectArray;
 
   //Create a new project on the nav
-  const createProject = (title, toDo) => {
-    const newproject = projects(title, toDo);
+  const createProject = (title, todo) => {
+    const newproject = projects(title, todo);
     projectArray.push(newproject);
     displayProjectList();
   };
-
+  //Display the project list in the nav
   const displayProjectList = () => {
     const projectDiv = document.createElement("div");
     const projectAdd = document.createElement("button");
@@ -31,6 +34,7 @@ export const project = (function () {
       projectAdd.id = `projectAdd-${index}`;
       projectAdd.addEventListener("click", () => {
         clearProjectDisplay();
+        toDo.clearTaskDisplay();
         displayProject(project.title, index);
       });
       projectRemove.textContent = "Remove";
@@ -43,30 +47,6 @@ export const project = (function () {
       projectList?.appendChild(projectDiv);
     });
   };
-  /*const createProject = () => {
-    const projectDiv = document.createElement("div");
-    const projectAdd = document.createElement("button");
-    const projectRemove = document.createElement("button");
-    projectArray.forEach((project, index) => {
-      projectDiv.className = "projectDiv";
-      projectDiv.id = `projectDiv${index}`;
-      projectAdd.textContent = project.title;
-      projectAdd.className = "projectAddBtn";
-      projectAdd.id = `projectAdd-${index}`;
-      projectAdd.addEventListener("click", () => {
-        clearProjectDisplay();
-        displayProject(project.title, index);
-      });
-      projectRemove.textContent = "Remove";
-      projectRemove.className = "projectRemoveBtn";
-      projectRemove.id = `projectRemove-${index}`;
-      projectRemove.addEventListener("click", removeProject);
-
-      projectDiv.appendChild(projectAdd);
-      projectDiv.appendChild(projectRemove);
-      projectList?.appendChild(projectDiv);
-    });
-  };*/
 
   //remove a project in the nav
   const removeProject = (event) => {
@@ -77,13 +57,6 @@ export const project = (function () {
     clearProjectDisplay();
     displayProjectList();
   };
-
-  /*//Display the project in the nav and add it in the project array
-  const displayProjectList = (title, toDo) => {
-    const newProject = projects(title, toDo);
-    projectArray.push(newProject);
-    createProject();
-  };*/
 
   //Display the project with is name and a button to add task with a form
   const displayProject = (title, index) => {
@@ -104,7 +77,7 @@ export const project = (function () {
       taskForm.show();
     });
     projectHead.appendChild(newTask);
-    projectDisplay?.appendChild(projectHead);
+    head?.appendChild(projectHead);
   };
 
   //Clear and close the form use to create a new project
@@ -121,7 +94,7 @@ export const project = (function () {
     if (!projectHead) {
       return;
     } else {
-      projectDisplay?.removeChild(projectHead);
+      head?.removeChild(projectHead);
     }
   };
   return { listProjects, createProject, displayProject, clearNewProject };

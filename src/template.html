@@ -29,6 +29,8 @@
       </div>
     </nav>
     <div id="projectDisplay">
+      <div id="head"></div>
+      <div id="taskDisplay"></div>
       <dialog id="taskForm">
         <form method="dialog">
           <section id="taskInfo">
@@ -53,7 +55,13 @@
           <section id="checkPriority">
             <legend>Priority</legend>
             <div>
-              <input type="radio" id="low" name="priority" value="low" />
+              <input
+                type="radio"
+                id="low"
+                name="priority"
+                value="low"
+                checked
+              />
               <label for="low">Low</label>
             </div>
             <div>
