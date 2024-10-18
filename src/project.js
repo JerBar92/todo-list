@@ -13,7 +13,13 @@ export const project = (function () {
   const listProjects = () => projectArray;
 
   //Create a new project on the nav
-  const createProject = () => {
+  const createProject = (title, toDo) => {
+    const newproject = projects(title, toDo);
+    projectArray.push(newproject);
+    displayProjectList();
+  };
+
+  const displayProjectList = () => {
     const projectDiv = document.createElement("div");
     const projectAdd = document.createElement("button");
     const projectRemove = document.createElement("button");
@@ -37,6 +43,30 @@ export const project = (function () {
       projectList?.appendChild(projectDiv);
     });
   };
+  /*const createProject = () => {
+    const projectDiv = document.createElement("div");
+    const projectAdd = document.createElement("button");
+    const projectRemove = document.createElement("button");
+    projectArray.forEach((project, index) => {
+      projectDiv.className = "projectDiv";
+      projectDiv.id = `projectDiv${index}`;
+      projectAdd.textContent = project.title;
+      projectAdd.className = "projectAddBtn";
+      projectAdd.id = `projectAdd-${index}`;
+      projectAdd.addEventListener("click", () => {
+        clearProjectDisplay();
+        displayProject(project.title, index);
+      });
+      projectRemove.textContent = "Remove";
+      projectRemove.className = "projectRemoveBtn";
+      projectRemove.id = `projectRemove-${index}`;
+      projectRemove.addEventListener("click", removeProject);
+
+      projectDiv.appendChild(projectAdd);
+      projectDiv.appendChild(projectRemove);
+      projectList?.appendChild(projectDiv);
+    });
+  };*/
 
   //remove a project in the nav
   const removeProject = (event) => {
@@ -45,15 +75,15 @@ export const project = (function () {
     const projectDiv = document.querySelectorAll(".projectDiv");
     projectDiv.forEach((div) => projectList?.removeChild(div));
     clearProjectDisplay();
-    createProject();
+    displayProjectList();
   };
 
-  //Display the project in the nav and add it in the project array
+  /*//Display the project in the nav and add it in the project array
   const displayProjectList = (title, toDo) => {
     const newProject = projects(title, toDo);
     projectArray.push(newProject);
     createProject();
-  };
+  };*/
 
   //Display the project with is name and a button to add task with a form
   const displayProject = (title, index) => {
@@ -94,5 +124,5 @@ export const project = (function () {
       projectDisplay?.removeChild(projectHead);
     }
   };
-  return { listProjects, displayProjectList, displayProject, clearNewProject };
+  return { listProjects, createProject, displayProject, clearNewProject };
 })();

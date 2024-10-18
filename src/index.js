@@ -12,11 +12,11 @@ cancelProject?.addEventListener("click", () => project.clearNewProject());
 const projectTitle = document.querySelector("#projectTitle");
 const addProject = document.querySelector("#addProject");
 
-//project.displayProjectList("My Project", []);
+project.createProject("My Project", []);
 
 addProject?.addEventListener("click", (event) => {
   event.preventDefault();
-  project.displayProjectList(projectTitle?.value, []);
+  project.createProject(projectTitle?.value, []);
   newProject?.close();
   project.clearNewProject();
 });
