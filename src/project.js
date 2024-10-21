@@ -2,7 +2,6 @@ import { toDo } from "./todo";
 
 export const project = (function () {
   const projectArray = [];
-  const projectDisplay = document.querySelector("#projectDisplay");
   const projectList = document.querySelector("#projectList");
   const head = document.querySelector("#head");
 
@@ -19,6 +18,7 @@ export const project = (function () {
   const createProject = (title, todo) => {
     const newproject = projects(title, todo);
     projectArray.push(newproject);
+    storeProject();
     displayProjectList();
   };
   //Display the project list in the nav
@@ -36,6 +36,7 @@ export const project = (function () {
         clearProjectDisplay();
         toDo.clearTaskDisplay();
         displayProject(project.title, index);
+        toDo.displayTaskCard(index);
       });
       projectRemove.textContent = "Remove";
       projectRemove.className = "projectRemoveBtn";
@@ -52,6 +53,7 @@ export const project = (function () {
   const removeProject = (event) => {
     let index = parseInt(event.target.id.split("-")[1]);
     projectArray.splice(index, 1);
+    storeProject();
     const projectDiv = document.querySelectorAll(".projectDiv");
     projectDiv.forEach((div) => projectList?.removeChild(div));
     clearProjectDisplay();
@@ -97,5 +99,21 @@ export const project = (function () {
       head?.removeChild(projectHead);
     }
   };
-  return { listProjects, createProject, displayProject, clearNewProject };
+
+  const storeProject = () => {
+    localStorage.setItem("projects", JSON.stringify(listProjects()));
+  };
+
+  function getStorage() {
+    return JSON.parse(localStorage.getItem("projects"));
+  }
+  return {
+    listProjects,
+    createProject,
+    displayProjectList,
+    displayProject,
+    clearNewProject,
+    storeProject,
+    getStorage,
+  };
 })();

@@ -35,7 +35,7 @@ export const toDo = (function () {
   const createTaskCard = (indexP, title, description, dueDate, priority) => {
     const newTask = createToDo(title, description, dueDate, priority);
     projectArray[indexP].todo.push(newTask);
-    console.log(project.listProjects());
+    project.storeProject();
     clearTaskDisplay();
     displayTaskCard(indexP);
   };
@@ -44,7 +44,7 @@ export const toDo = (function () {
     projectArray[indexP].todo.forEach((task, indexT) => {
       const cardDiv = document.createElement("div");
       cardDiv.className = "cardDiv";
-      cardDiv.id = `cardDiv${indexT}`;
+      cardDiv.id = `cardDiv-${indexT}`;
       const title = document.createElement("h3");
       title.textContent = task.title;
       cardDiv.appendChild(title);
@@ -60,8 +60,10 @@ export const toDo = (function () {
       const deleteTask = document.createElement("button");
       deleteTask.textContent = "Delete";
       deleteTask.className = "deleteTask";
-      deleteTask.id = `deleteTask${indexT}`;
-      deleteTask.addEventListener("click", removeTaskCard);
+      deleteTask.id = `deleteTask-${indexT}`;
+      deleteTask.addEventListener("click", (event) =>
+        removeTaskCard(event, indexP)
+      );
       cardDiv.appendChild(deleteTask);
       taskDisplay?.appendChild(cardDiv);
     });
@@ -69,7 +71,8 @@ export const toDo = (function () {
 
   const removeTaskCard = (event, indexP) => {
     let indexT = parseInt(event.target.id.split("-")[1]);
-    projectArray[indexP].todo[indexT].splice(indexT, 1);
+    projectArray[indexP].todo.splice(indexT, 1);
+    project.storeProject();
     const cardDiv = document.querySelectorAll(".cardDiv");
     cardDiv.forEach((div) => taskDisplay?.removeChild(div));
     clearTaskDisplay();
@@ -96,23 +99,12 @@ export const toDo = (function () {
     }
   };
 
-  addTask?.addEventListener("click", (event) => {
-    let indexP = giveIndexProject(event);
-    createTaskCard(
-      indexP,
-      taskTitle.value,
-      taskDescription.value,
-      dueDate.value,
-      priority.value
-    );
-    clearNewTask();
-  });
-
   return {
     createToDo,
     createTaskCard,
     giveIndexProject,
     clearTaskDisplay,
     clearNewTask,
+    displayTaskCard,
   };
 })();
