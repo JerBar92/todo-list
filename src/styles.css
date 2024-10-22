@@ -69,7 +69,7 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 #taskInfo label {
@@ -77,7 +77,11 @@ h2 {
 }
 
 #checkPriority {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+#checkPriority legend {
+  margin-bottom: 0.5rem;
 }
 
 .projectDiv {
@@ -106,6 +110,10 @@ h2 {
   align-items: center;
 }
 
+#taskDisplay {
+  min-width: 100vh;
+}
+
 .cardDiv {
   margin-top: 0.5rem;
   margin-left: 0.3rem;
@@ -113,7 +121,13 @@ h2 {
   padding: 0.3rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   border: 0.1rem solid black;
   border-radius: 10px;
+}
+
+.cardDiv div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 20%;
 }

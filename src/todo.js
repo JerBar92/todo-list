@@ -3,18 +3,12 @@
 import { project } from "./project";
 
 export const toDo = (function () {
-  const projectDisplay = document.querySelector("#projectDisplay");
   const taskTitle = document.querySelector("#taskTitle");
   const taskDescription = document.querySelector("#taskDescription");
   const dueDate = document.querySelector("#date");
-  const priority = document.querySelector(`input[name=priority]:checked`);
   const priorityLow = document.querySelector("#low");
   const priorityMedium = document.querySelector("#medium");
   const priorityHigh = document.querySelector("#high");
-  const cancelTask = document.querySelector("#cancelTask");
-  const addTask = document.querySelector(".addTask");
-  const projectName = document.querySelector("#projectName");
-  const newTaskBtn = document.querySelector(".newTaskBtn");
   const projectArray = project.listProjects();
   const taskDisplay = document.querySelector("#taskDisplay");
 
@@ -45,18 +39,35 @@ export const toDo = (function () {
       const cardDiv = document.createElement("div");
       cardDiv.className = "cardDiv";
       cardDiv.id = `cardDiv-${indexT}`;
+      const titleDiv = document.createElement("div");
       const title = document.createElement("h3");
       title.textContent = task.title;
-      cardDiv.appendChild(title);
+      titleDiv.appendChild(title);
+      cardDiv.appendChild(titleDiv);
+      const descriptionDiv = document.createElement("div");
       const description = document.createElement("p");
       description.textContent = task.description;
-      cardDiv.appendChild(description);
+      descriptionDiv.appendChild(description);
+      cardDiv.appendChild(descriptionDiv);
+      const dateDiv = document.createElement("div");
       const date = document.createElement("p");
       date.textContent = task.dueDate;
-      cardDiv.appendChild(date);
+      dateDiv.appendChild(date);
+      cardDiv.appendChild(dateDiv);
+      const taskPriorityDiv = document.createElement("div");
       const taskPriority = document.createElement("p");
       taskPriority.textContent = task.priority;
-      cardDiv.appendChild(taskPriority);
+      if (task.priority === "Low") {
+        taskPriority.style.color = "green";
+      } else if (task.priority === "Medium") {
+        taskPriority.style.color = "orange";
+      } else {
+        taskPriority.style.color = "red";
+      }
+      console.log(task.priority);
+      taskPriorityDiv.appendChild(taskPriority);
+      cardDiv.appendChild(taskPriorityDiv);
+      const deleteTaskDiv = document.createElement("div");
       const deleteTask = document.createElement("button");
       deleteTask.textContent = "Delete";
       deleteTask.className = "deleteTask";
@@ -64,7 +75,8 @@ export const toDo = (function () {
       deleteTask.addEventListener("click", (event) =>
         removeTaskCard(event, indexP)
       );
-      cardDiv.appendChild(deleteTask);
+      deleteTaskDiv.appendChild(deleteTask);
+      cardDiv.appendChild(deleteTaskDiv);
       taskDisplay?.appendChild(cardDiv);
     });
   };
@@ -73,8 +85,6 @@ export const toDo = (function () {
     let indexT = parseInt(event.target.id.split("-")[1]);
     projectArray[indexP].todo.splice(indexT, 1);
     project.storeProject();
-    const cardDiv = document.querySelectorAll(".cardDiv");
-    cardDiv.forEach((div) => taskDisplay?.removeChild(div));
     clearTaskDisplay();
     displayTaskCard(indexP);
   };

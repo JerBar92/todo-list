@@ -2,8 +2,9 @@ import { toDo } from "./todo.js";
 import { project } from "./project.js";
 import "./styles.css";
 
-//project.createProject("My Project", []);
-project.displayProjectList();
+window.onload = function () {
+  project.displayProjectList(project.listProjects());
+};
 
 const newProjectBtn = document.querySelector("#newProjectBtn");
 const newProject = document.querySelector("#newProject");

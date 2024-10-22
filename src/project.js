@@ -1,7 +1,7 @@
 import { toDo } from "./todo";
 
 export const project = (function () {
-  const projectArray = [];
+  const projectArray = getStorage();
   const projectList = document.querySelector("#projectList");
   const head = document.querySelector("#head");
 
@@ -19,14 +19,16 @@ export const project = (function () {
     const newproject = projects(title, todo);
     projectArray.push(newproject);
     storeProject();
-    displayProjectList();
+    console.log(getStorage());
+    displayProjectList(projectArray);
   };
   //Display the project list in the nav
-  const displayProjectList = () => {
-    const projectDiv = document.createElement("div");
-    const projectAdd = document.createElement("button");
-    const projectRemove = document.createElement("button");
-    projectArray.forEach((project, index) => {
+  const displayProjectList = (array) => {
+    projectList?.replaceChildren();
+    array.forEach((project, index) => {
+      const projectDiv = document.createElement("div");
+      const projectAdd = document.createElement("button");
+      const projectRemove = document.createElement("button");
       projectDiv.className = "projectDiv";
       projectDiv.id = `projectDiv${index}`;
       projectAdd.textContent = project.title;
@@ -57,7 +59,7 @@ export const project = (function () {
     const projectDiv = document.querySelectorAll(".projectDiv");
     projectDiv.forEach((div) => projectList?.removeChild(div));
     clearProjectDisplay();
-    displayProjectList();
+    displayProjectList(projectArray);
   };
 
   //Display the project with is name and a button to add task with a form
@@ -97,15 +99,21 @@ export const project = (function () {
       return;
     } else {
       head?.removeChild(projectHead);
+      toDo.clearTaskDisplay();
     }
   };
 
-  const storeProject = () => {
+  function storeProject() {
     localStorage.setItem("projects", JSON.stringify(listProjects()));
-  };
+  }
 
   function getStorage() {
-    return JSON.parse(localStorage.getItem("projects"));
+    let storage = JSON.parse(localStorage.getItem("projects"));
+    if (!storage) {
+      return [];
+    } else {
+      return storage;
+    }
   }
   return {
     listProjects,
