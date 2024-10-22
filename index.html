@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <nav>
+      <div id="title">
+        <h1>To-Do List</h1>
+      </div>
+      <div id="projects">
+        <h2>Projects</h2>
+        <button id="newProjectBtn">New project</button>
+        <div id="projectList"></div>
+        <dialog id="newProject">
+          <form method="dialog">
+            <section id="projectDetails">
+              <label for="projectTitle">Title: </label>
+              <input type="text" id="projectTitle" name="projectTitle" />
+            </section>
+            <section id="projectButton">
+              <button id="cancelProject">Cancel</button>
+              <button id="addProject" type="submit">Add</button>
+            </section>
+          </form>
+        </dialog>
+      </div>
+    </nav>
+    <div id="projectDisplay">
+      <div id="head"></div>
+      <div id="taskDisplay"></div>
+      <dialog id="taskForm">
+        <form method="dialog">
+          <section id="taskInfo">
+            <div>
+              <label for="taskTitle">Title: </label>
+              <input type="text" id="taskTitle" name="taskTitle" />
+            </div>
+            <div>
+              <label for="taskDescription">Description: </label>
+              <textarea
+                id="taskDescription"
+                name="taskDescription"
+                rows="2"
+                cols="30"
+              ></textarea>
+            </div>
+            <div>
+              <label for="date">Due Date: </label>
+              <input type="date" id="date" name="date" />
+            </div>
+          </section>
+          <section id="checkPriority">
+            <legend>Priority</legend>
+            <div>
+              <input type="radio" id="low" name="priority" value="Low" />
+              <label for="low">Low</label>
+            </div>
+            <div>
+              <input type="radio" id="medium" name="priority" value="Medium" />
+              <label for="medium">Medium</label>
+            </div>
+            <div>
+              <input type="radio" id="high" name="priority" value="High" />
+              <label for="high">High</label>
+            </div>
+          </section>
+          <section id="taskButton">
+            <button id="cancelTask">Cancel</button>
+            <button class="addTask" type="submit">Add</button>
+          </section>
+        </form>
+      </dialog>
+    </div>
+  </body>
+</html>
